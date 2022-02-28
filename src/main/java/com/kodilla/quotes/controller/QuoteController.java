@@ -2,9 +2,7 @@ package com.kodilla.quotes.controller;
 
 import com.kodilla.quotes.model.Quote;
 import com.kodilla.quotes.service.QuoteService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/quote")
@@ -19,5 +17,10 @@ public class QuoteController {
     @GetMapping("/random")
     public Quote getRandom() {
         return quoteService.getRandomQuote();
+    }
+
+    @GetMapping("/{quoteId}")
+    public Quote getById(@PathVariable Long quoteId) {
+        return quoteService.getById(quoteId);
     }
 }

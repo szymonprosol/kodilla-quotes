@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: quotes-k8s
+  labels:
+    app: quotes-k8s
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app: quotes-k8s
+  template:
+    metadata:
+      labels:
+        app: quotes-k8s
+    spec:
+      containers:
+        - name: quotes-k8s
+          image: szymonrosol/quotes:2.0
+          ports:
+            - containerPort: 8080
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 8080
+            initialDelaySeconds: 10
+            periodSeconds: 3
